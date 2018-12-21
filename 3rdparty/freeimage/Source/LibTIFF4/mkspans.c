@@ -1,5 +1,3 @@
-/* $Id: mkspans.c,v 1.4 2012/10/07 15:54:03 drolon Exp $ */
-
 /*
  * Copyright (c) 1991-1997 Sam Leffler
  * Copyright (c) 1991-1997 Silicon Graphics, Inc.

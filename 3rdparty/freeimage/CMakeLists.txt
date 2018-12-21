@@ -1,14 +1,12 @@
 ## Find source and headers
 FILE(GLOB HEADERS
   Source/*.h
-  Source/DeprecationManager/*.h
   Source/FreeImage/*.h
   Source/FreeImageToolkit/*.h
   Source/Metadata/*.h
 )
 FILE(GLOB SOURCES
   Source/*.c*
-  Source/DeprecationManager/*.c*
   Source/FreeImage/*.c*
   Source/FreeImageToolkit/*.c*
   Source/Metadata/*.c*
@@ -75,8 +73,15 @@ FILE(GLOB JPEG_SOURCES
   Source/LibJPEG/jmemansi.c
 )
 
-FILE(GLOB MNG_HEADERS Source/LibMNG/*.h)
-FILE(GLOB MNG_SOURCES Source/LibMNG/*.c*)
+FILE(GLOB JXR_HEADERS
+  Source/LibJXR/common/include/*.h
+  Source/LibJXR/image/sys/*.h
+  Source/LibJXR/jxrgluelib/*.h
+)
+FILE(GLOB JXR_SOURCES
+  Source/LibJXR/image/sys/*.c
+  Source/LibJXR/jxrgluelib/*.c*
+)
 
 FILE(GLOB OJPEG_HEADERS Source/LibOpenJPEG/*.h)
 FILE(GLOB OJPEG_SOURCES Source/LibOpenJPEG/*.c*)
@@ -198,8 +203,8 @@ IF(CMAKE_HAS_SORT)
   LIST(SORT SOURCES)
   LIST(SORT JPEG_HEADERS)
   LIST(SORT JPEG_SOURCES)
-  LIST(SORT MNG_HEADERS)
-  LIST(SORT MNG_SOURCES)
+  LIST(SORT JXR_HEADERS)
+  LIST(SORT JXR_SOURCES)
   LIST(SORT OJPEG_HEADERS)
   LIST(SORT OJPEG_SOURCES)
   LIST(SORT PNG_HEADERS)
@@ -215,6 +220,16 @@ IF(CMAKE_HAS_SORT)
 ENDIF(CMAKE_HAS_SORT)
 
 ## Build
+SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -fPIC -fexceptions -fvisibility=hidden")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fPIC -fexceptions -fvisibility=hidden -Wno-ctor-dtor-privacy")
+# OpenJPEG
+SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DOPJ_STATIC")
+# LibRaw
+SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DNO_LCMS")
+# LibJXR
+SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DDISABLE_PERF_MEASUREMENT -D__ANSI__")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__ANSI__")
+
 ADD_DEFINITIONS(-DFREEIMAGE_LIB)
 ADD_DEFINITIONS(-DOPJ_STATIC)
 ADD_DEFINITIONS(-DLIBRAW_NODLL)
@@ -225,7 +240,9 @@ INCLUDE_DIRECTORIES(
   Source/Metadata
   Source/FreeImageToolkit
   Source/LibJPEG
-  Source/LibMNG
+  Source/LibJXR/common/include
+  Source/LibJXR/image/sys
+  Source/LibJXR/jxrgluelib
   Source/LibOpenJPEG
   Source/LibPNG
   Source/LibTIFF
@@ -242,7 +259,7 @@ INCLUDE_DIRECTORIES(
 ADD_LIBRARY(freeimage
   ${SOURCES} ${HEADERS}
   ${JPEG_SOURCES} ${JPEG_HEADERS}
-  ${MNG_SOURCES} ${MNG_HEADERS}
+  ${JXR_SOURCES} ${JXR_HEADERS}
   ${OJPEG_SOURCES} ${OJPEG_HEADERS}
   ${PNG_SOURCES} ${PNG_HEADERS}
   ${RAWLITE_SOURCES} ${RAWLITE_HEADERS}

@@ -41,9 +41,9 @@
 //-----------------------------------------------------------------------------
 
 #include <ImfDoubleAttribute.h>
-#include <algorithm>
 
-namespace Imf {
+
+OPENEXR_IMF_INTERNAL_NAMESPACE_SOURCE_ENTER
 
 
 template <>
@@ -54,4 +54,4 @@ DoubleAttribute::staticTypeName ()
 }
 
 
-} // namespace Imf
+OPENEXR_IMF_INTERNAL_NAMESPACE_SOURCE_EXIT 

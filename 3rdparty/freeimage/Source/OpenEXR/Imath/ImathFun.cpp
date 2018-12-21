@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////
 //
-// Copyright (c) 2002, Industrial Light & Magic, a division of Lucas
+// Copyright (c) 2002-2012, Industrial Light & Magic, a division of Lucas
 // Digital Ltd. LLC
 // 
 // All rights reserved.
@@ -34,9 +34,8 @@
 
 
 #include "ImathFun.h"
-#include <algorithm>
 
-namespace Imath {
+IMATH_INTERNAL_NAMESPACE_SOURCE_ENTER
 
 
 float
@@ -125,7 +124,7 @@ succd (double d)
 
         u.i = 0x0000000000000001LL;
     }
-    else if (u.i > 0)
+    else if (u.d > 0)
     {
         // Positive double, normalized or denormalized.
         // Incrementing the largest positive double
@@ -160,7 +159,7 @@ predd (double d)
 
         u.i = 0x8000000000000001LL;
     }
-    else if (u.i > 0)
+    else if (u.d > 0)
     {
         // Positive double, normalized or denormalized.
 
@@ -179,4 +178,4 @@ predd (double d)
 }
 
 
-} // namespace Imath
+IMATH_INTERNAL_NAMESPACE_SOURCE_EXIT

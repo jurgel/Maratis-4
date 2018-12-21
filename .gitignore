@@ -36,3 +36,5 @@ BuildVC
 BuildX
 bin
 CMakeLists.txt.user
+.idea
+cmake-build-debug

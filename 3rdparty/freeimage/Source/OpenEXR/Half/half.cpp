@@ -46,7 +46,6 @@
 
 #include <assert.h>
 #include "half.h"
-#include <algorithm>
 
 using namespace std;
 
@@ -54,11 +53,10 @@ using namespace std;
 // Lookup tables for half-to-float and float-to-half conversion
 //-------------------------------------------------------------
 
-HALF_EXPORT_CONST half::uif half::_toFloat[1 << 16] =
-#include "toFloat.h"
-HALF_EXPORT_CONST unsigned short half::_eLut[1 << 9] =
-#include "eLut.h"
-
+HALF_EXPORT const half::uif half::_toFloat[1 << 16] =
+    #include "toFloat.h"
+HALF_EXPORT const unsigned short half::_eLut[1 << 9] =
+    #include "eLut.h"
 
 //-----------------------------------------------
 // Overflow handler for float-to-half conversion;
@@ -66,14 +64,14 @@ HALF_EXPORT_CONST unsigned short half::_eLut[1 << 9] =
 // which may be trapped by the operating system.
 //-----------------------------------------------
 
-float
+HALF_EXPORT float
 half::overflow ()
 {
     volatile float f = 1e10;
 
     for (int i = 0; i < 10; i++)	
 	f *= f;				// this will overflow before
-					// the forÂ­loop terminates
+					// the for­loop terminates
     return f;
 }
 
@@ -83,7 +81,7 @@ half::overflow ()
 // zeroes, denormalized numbers and exponent overflows.
 //-----------------------------------------------------
 
-short
+HALF_EXPORT short
 half::convert (int i)
 {
     //
@@ -223,7 +221,7 @@ half::convert (int i)
 // Stream I/O operators
 //---------------------
 
-ostream &
+HALF_EXPORT ostream &
 operator << (ostream &os, half h)
 {
     os << float (h);
@@ -231,7 +229,7 @@ operator << (ostream &os, half h)
 }
 
 
-istream &
+HALF_EXPORT istream &
 operator >> (istream &is, half &h)
 {
     float f;
@@ -246,7 +244,7 @@ operator >> (istream &is, half &h)
 // floats and halfs, mostly for debugging
 //---------------------------------------
 
-void
+HALF_EXPORT void
 printBits (ostream &os, half h)
 {
     unsigned short b = h.bits();
@@ -261,7 +259,7 @@ printBits (ostream &os, half h)
 }
 
 
-void
+HALF_EXPORT void
 printBits (ostream &os, float f)
 {
     half::uif x;
@@ -277,7 +275,7 @@ printBits (ostream &os, float f)
 }
 
 
-void
+HALF_EXPORT void
 printBits (char c[19], half h)
 {
     unsigned short b = h.bits();
@@ -294,7 +292,7 @@ printBits (char c[19], half h)
 }
 
 
-void
+HALF_EXPORT void
 printBits (char c[35], float f)
 {
     half::uif x;
