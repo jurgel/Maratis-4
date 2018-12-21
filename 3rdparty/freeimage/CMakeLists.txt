@@ -79,6 +79,8 @@ FILE(GLOB JXR_HEADERS
   Source/LibJXR/jxrgluelib/*.h
 )
 FILE(GLOB JXR_SOURCES
+  Source/LibJXR/image/decode/*.c
+  Source/LibJXR/image/encode/*.c
   Source/LibJXR/image/sys/*.c
   Source/LibJXR/jxrgluelib/*.c*
 )
@@ -118,61 +120,65 @@ FILE(GLOB RAWLITE_HEADERS
   Source/LibRawLite/libraw/*.h
 )
 FILE(GLOB RAWLITE_SOURCES
-  Source/LibRawLite/internal/*.cpp
-  Source/LibRawLite/src/*.cpp
+  Source/LibRawLite/internal/dcraw_common.cpp
+  Source/LibRawLite/internal/dcraw_fileio.cpp
+  Source/LibRawLite/internal/demosaic_packs.cpp
+  Source/LibRawLite/src/libraw_c_api.cpp
+  Source/LibRawLite/src/libraw_cxx.cpp
+  Source/LibRawLite/src/libraw_datastream.cpp
 )
 
 FILE(GLOB TIFF_HEADERS
-  Source/LibTIFF/*.h
+  Source/LibTIFF4/*.h
 )
 FILE(GLOB TIFF_SOURCES
-  Source/LibTIFF/tif_aux.c
-  Source/LibTIFF/tif_close.c
-  Source/LibTIFF/tif_codec.c
-  Source/LibTIFF/tif_color.c
-  Source/LibTIFF/tif_compress.c
-  Source/LibTIFF/tif_dir.c
-  Source/LibTIFF/tif_dirinfo.c
-  Source/LibTIFF/tif_dirread.c
-  Source/LibTIFF/tif_dirwrite.c
-  Source/LibTIFF/tif_dumpmode.c
-  Source/LibTIFF/tif_error.c
-  Source/LibTIFF/tif_extension.c
-  Source/LibTIFF/tif_fax3.c
-  Source/LibTIFF/tif_fax3sm.c
-  Source/LibTIFF/tif_flush.c
-  Source/LibTIFF/tif_getimage.c
-  Source/LibTIFF/tif_jbig.c
-  Source/LibTIFF/tif_jpeg.c
-  Source/LibTIFF/tif_luv.c
-  Source/LibTIFF/tif_lzw.c
-  Source/LibTIFF/tif_next.c
-  Source/LibTIFF/tif_ojpeg.c
-  Source/LibTIFF/tif_open.c
-  Source/LibTIFF/tif_packbits.c
-  Source/LibTIFF/tif_pixarlog.c
-  Source/LibTIFF/tif_predict.c
-  Source/LibTIFF/tif_print.c
-  Source/LibTIFF/tif_read.c
-  Source/LibTIFF/tif_strip.c
-  Source/LibTIFF/tif_swab.c
-  Source/LibTIFF/tif_thunder.c
-  Source/LibTIFF/tif_tile.c
-  Source/LibTIFF/tif_version.c
-  Source/LibTIFF/tif_warning.c
-  Source/LibTIFF/tif_write.c
-  Source/LibTIFF/tif_zip.c
+  Source/LibTIFF4/tif_aux.c
+  Source/LibTIFF4/tif_close.c
+  Source/LibTIFF4/tif_codec.c
+  Source/LibTIFF4/tif_color.c
+  Source/LibTIFF4/tif_compress.c
+  Source/LibTIFF4/tif_dir.c
+  Source/LibTIFF4/tif_dirinfo.c
+  Source/LibTIFF4/tif_dirread.c
+  Source/LibTIFF4/tif_dirwrite.c
+  Source/LibTIFF4/tif_dumpmode.c
+  Source/LibTIFF4/tif_error.c
+  Source/LibTIFF4/tif_extension.c
+  Source/LibTIFF4/tif_fax3.c
+  Source/LibTIFF4/tif_fax3sm.c
+  Source/LibTIFF4/tif_flush.c
+  Source/LibTIFF4/tif_getimage.c
+  Source/LibTIFF4/tif_jbig.c
+  Source/LibTIFF4/tif_jpeg.c
+  Source/LibTIFF4/tif_luv.c
+  Source/LibTIFF4/tif_lzw.c
+  Source/LibTIFF4/tif_next.c
+  Source/LibTIFF4/tif_ojpeg.c
+  Source/LibTIFF4/tif_open.c
+  Source/LibTIFF4/tif_packbits.c
+  Source/LibTIFF4/tif_pixarlog.c
+  Source/LibTIFF4/tif_predict.c
+  Source/LibTIFF4/tif_print.c
+  Source/LibTIFF4/tif_read.c
+  Source/LibTIFF4/tif_strip.c
+  Source/LibTIFF4/tif_swab.c
+  Source/LibTIFF4/tif_thunder.c
+  Source/LibTIFF4/tif_tile.c
+  Source/LibTIFF4/tif_version.c
+  Source/LibTIFF4/tif_warning.c
+  Source/LibTIFF4/tif_write.c
+  Source/LibTIFF4/tif_zip.c
 )
 
 IF(WIN32)
   FILE(GLOB TIFF_SOURCES ${TIFF_SOURCES}
-    Source/LibTIFF/tif_win32.c
+    Source/LibTIFF4/tif_win32.c
   )
 ENDIF(WIN32)
 
 IF(UNIX)
   FILE(GLOB TIFF_SOURCES ${TIFF_SOURCES}
-    Source/LibTIFF/tif_unix.c
+    Source/LibTIFF4/tif_unix.c
   )
 ENDIF(UNIX)
 
@@ -193,6 +199,24 @@ FILE(GLOB EXR_SOURCES
   Source/OpenEXR/IlmThread/IlmThreadMutex.cpp
   Source/OpenEXR/IlmThread/IlmThreadPool.cpp
   Source/OpenEXR/Imath/*.c*
+)
+
+FILE(GLOB WEBP_HEADERS
+  Source/LibWebP/src/dec/*.h
+  Source/LibWebP/src/dsp/*.h
+  Source/LibWebP/src/enc/*.h
+  Source/LibWebP/src/mux/*.h
+  Source/LibWebP/src/utils/*.h
+  Source/LibWebP/src/webp/*.h
+)
+
+FILE(GLOB WEBP_SOURCES
+  Source/LibWebP/src/dec/*.c
+  Source/LibWebP/src/demux/*.c
+  Source/LibWebP/src/dsp/*.c
+  Source/LibWebP/src/enc/*.c
+  Source/LibWebP/src/mux/*.c
+  Source/LibWebP/src/utils/*.c
 )
 
 FILE(GLOB ZLIB_HEADERS Source/ZLib/*.h)
@@ -223,9 +247,10 @@ ENDIF(CMAKE_HAS_SORT)
 SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -fPIC -fexceptions -fvisibility=hidden")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fPIC -fexceptions -fvisibility=hidden -Wno-ctor-dtor-privacy")
 # OpenJPEG
-SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DOPJ_STATIC")
+SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DOPJ_STATIC -DUSE_JPIP")
 # LibRaw
-SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DNO_LCMS")
+SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DNO_LCMS -DLIBRAW_LIBRARY_BUILD")
+#SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 # LibJXR
 SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DDISABLE_PERF_MEASUREMENT -D__ANSI__")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__ANSI__")
@@ -240,19 +265,26 @@ INCLUDE_DIRECTORIES(
   Source/Metadata
   Source/FreeImageToolkit
   Source/LibJPEG
+  Source/LibJXR
   Source/LibJXR/common/include
   Source/LibJXR/image/sys
   Source/LibJXR/jxrgluelib
   Source/LibOpenJPEG
   Source/LibPNG
-  Source/LibTIFF
+  Source/LibTIFF4
   Source/OpenEXR
   Source/OpenEXR/IlmImf
   Source/OpenEXR/Imath
   Source/OpenEXR/Iex
+  Source/OpenEXR/IexMath
   Source/OpenEXR/Half
   Source/OpenEXR/IlmThread
   Source/LibRawLite
+  Source/LibRawLite/dcraw
+  Source/LibRawLite/internal
+  Source/LibRawLite/libraw
+  Source/LibRawLite/src
+  Source/LibWebP
   Source/ZLib
 )
 
@@ -265,5 +297,6 @@ ADD_LIBRARY(freeimage
   ${RAWLITE_SOURCES} ${RAWLITE_HEADERS}
   ${TIFF_SOURCES} ${TIFF_HEADERS}
   ${EXR_SOURCES} ${EXR_HEADERS}
+  ${WEBP_SOURCES} ${WEBP_HEADERS}
   ${ZLIB_SOURCES} ${ZLIB_HEADERS}
 )
