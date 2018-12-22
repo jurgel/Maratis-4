@@ -426,7 +426,7 @@ void readBehaviorProperties(TiXmlElement * node, MBehavior * behavior)
 		case M_VARIABLE_VEC4:
 			readFloatValues(node, name, *((MVector4*)variable.getPointer()), 4);
 			break;
-		case M_VARIABLE_TEXTURE_REF:
+		case M_VARIABLE_DATA_REF:
 			{
 				MTextureRef** textureRef = (MTextureRef**)variable.getPointer();
 				
@@ -482,7 +482,7 @@ void readBehaviors(TiXmlElement * node, MObject3d * object)
 	}
 }
 
-bool xmlLevelLoad(const char * filename, void * data){
+bool xmlLevelLoad(const char * filename, void * data, void * arg){
 	return M_loadLevel(filename, data);
 }
 
@@ -494,7 +494,7 @@ bool M_loadLevel(const char * filename, void * data, const bool clearData)
 	char textFilename[256];
 
 	// get rep
-	getRepertory(rep, filename);
+	getDirectory(rep, filename);
 
 	// read document
 	TiXmlDocument doc(filename);

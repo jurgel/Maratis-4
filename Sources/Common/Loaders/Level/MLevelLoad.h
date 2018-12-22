@@ -31,7 +31,7 @@
 #ifndef _M_LEVEL_LOAD_H
 #define _M_LEVEL_LOAD_H
 
-bool xmlLevelLoad(const char * filename, void * data);
+bool xmlLevelLoad(const char * filename, void * data, void * arg);
 bool M_loadLevel(const char * filename, void * data, const bool clearData = true);
 
 #endif

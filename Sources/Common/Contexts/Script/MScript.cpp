@@ -3822,6 +3822,15 @@ int doFile(lua_State * L)
 	return 0;
 }
 
+int log(lua_State * L)
+{
+	if(! isFunctionOk(L, "log", 1))
+		return 0;
+
+	const char * text = lua_tostring(L, 1);
+	printf("script log : %s\n", text);
+}
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Init
@@ -4044,6 +4053,8 @@ void MScript::init(void)
 	lua_register(m_state, "getWindowScale", getWindowScale);
 	lua_register(m_state, "getSystemTick",	getSystemTick);
 	lua_register(m_state, "quit",			quit);
+
+	lua_register(m_state, "log", log);
 	
 
 	// register custom functions
