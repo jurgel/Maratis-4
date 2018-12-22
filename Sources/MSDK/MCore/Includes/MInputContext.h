@@ -55,6 +55,8 @@ public:
 	virtual void createProperty(const char * name) = 0;
 
 	// inputs events
+	virtual void downKey(int key) = 0;
+	virtual void upKey(int key) = 0;
 	virtual void downKey(const char * name) = 0;
 	virtual void upKey(const char * name) = 0;
 	virtual void setAxis(const char * name, float axis) = 0;

@@ -128,6 +128,27 @@ void winEvents(MWindow *rootWindow, MWIN_EVENT_TYPE event)
     }
     break;
 
+    case MWIN_EVENT_KEY_DOWN:
+    {
+        input->downKey(MGUI_getWindow(0)->getKey());
+    }
+    break;
+
+    case MWIN_EVENT_KEY_UP:
+    {
+        input->upKey(MGUI_getWindow(0)->getKey());
+    }
+    break;
+
+    case MWIN_EVENT_MOUSE_MOVE:
+    {
+        MWindow * window = MGUI_getWindow(0);
+        MVector2 dir = window->getMousePosition();
+        input->setAxis("MOUSE_X", dir.x / (float)window->getWidth());
+        input->setAxis("MOUSE_Y", dir.y / (float)window->getHeight());
+    }
+    break;
+
     default:
         break;
     }

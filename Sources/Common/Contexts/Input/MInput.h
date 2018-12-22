@@ -70,6 +70,8 @@ public:
 	void createAxis(const char * name, bool flush=false);
 	void createProperty(const char * name);
 
+	void downKey(int key);
+	void upKey(int key);
 	void downKey(const char * name);
 	void upKey(const char * name);
 	void setAxis(const char * name, float axis);

@@ -29,10 +29,75 @@
 
 
 #include "MInput.h"
+#include "MWinEvents.h"
 
 #include "MVector2.h"
 #include "MVector3.h"
 
+
+static const char * getKeyMapping(int key)
+{
+	switch(key)
+	{
+		case MKEY_BACKSPACE:	return "BACKSPACE";
+		case MKEY_TAB:			return "TAB";
+		case MKEY_RETURN:		return "ENTER";
+//		case GLFW_KEY_PAUSE:		return MKEY_PAUSE;
+//		case GLFW_KEY_ESCAPE:		return MKEY_ESCAPE;
+//		case GLFW_KEY_DELETE:		return MKEY_DELETE;
+//		case GLFW_KEY_KP_0:			return MKEY_KP_0;
+//		case GLFW_KEY_KP_1:			return MKEY_KP_1;
+//		case GLFW_KEY_KP_2:			return MKEY_KP_2;
+//		case GLFW_KEY_KP_3:			return MKEY_KP_3;
+//		case GLFW_KEY_KP_4:			return MKEY_KP_4;
+//		case GLFW_KEY_KP_5:			return MKEY_KP_5;
+//		case GLFW_KEY_KP_6:			return MKEY_KP_6;
+//		case GLFW_KEY_KP_7:			return MKEY_KP_7;
+//		case GLFW_KEY_KP_8:			return MKEY_KP_8;
+//		case GLFW_KEY_KP_9:			return MKEY_KP_9;
+//		case GLFW_KEY_KP_ENTER:		return MKEY_KP_ENTER;
+//		case GLFW_KEY_KP_ADD:		return MKEY_KP_ADD;
+//		case GLFW_KEY_KP_SUBTRACT:	return MKEY_KP_SUB;
+//		case GLFW_KEY_KP_MULTIPLY:	return MKEY_KP_MUL;
+//		case GLFW_KEY_KP_DIVIDE:	return MKEY_KP_DIV;
+//		case GLFW_KEY_KP_DECIMAL:	return MKEY_KP_DECIMAL;
+//		case GLFW_KEY_KP_EQUAL:		return MKEY_KP_EQUAL;
+		case MKEY_UP:			return "UP";
+		case MKEY_DOWN:			return "DOWN";
+		case MKEY_RIGHT:		return "LEFT";
+		case MKEY_LEFT:			return "RIGHT";
+//		case GLFW_KEY_INSERT:		return MKEY_INSERT;
+//		case GLFW_KEY_HOME:			return MKEY_HOME;
+//		case GLFW_KEY_END:			return MKEY_END;
+//		case GLFW_KEY_PAGE_UP:		return MKEY_PAGEUP;
+//		case GLFW_KEY_PAGE_DOWN:	return MKEY_PAGEDOWN;
+//		case GLFW_KEY_F1:			return MKEY_F1;
+//		case GLFW_KEY_F2:			return MKEY_F2;
+//		case GLFW_KEY_F3:			return MKEY_F3;
+//		case GLFW_KEY_F4:			return MKEY_F4;
+//		case GLFW_KEY_F5:			return MKEY_F5;
+//		case GLFW_KEY_F6:			return MKEY_F6;
+//		case GLFW_KEY_F7:			return MKEY_F7;
+//		case GLFW_KEY_F8:			return MKEY_F8;
+//		case GLFW_KEY_F9:			return MKEY_F9;
+//		case GLFW_KEY_F10:			return MKEY_F10;
+//		case GLFW_KEY_F11:			return MKEY_F11;
+//		case GLFW_KEY_F12:			return MKEY_F12;
+//		case GLFW_KEY_CAPS_LOCK:	return MKEY_CAPSLOCK;
+//		case GLFW_KEY_NUM_LOCK:		return MKEY_NUMLOCK;
+//		case GLFW_KEY_RIGHT_SHIFT:	return MKEY_RSHIFT;
+//		case GLFW_KEY_LEFT_SHIFT:	return MKEY_LSHIFT;
+//		case GLFW_KEY_RIGHT_CONTROL:return MKEY_RCONTROL;
+//		case GLFW_KEY_LEFT_CONTROL:	return MKEY_LCONTROL;
+//		case GLFW_KEY_RIGHT_ALT:	return MKEY_RALT;
+//		case GLFW_KEY_LEFT_ALT:		return MKEY_LALT;
+//		case GLFW_KEY_PRINT_SCREEN:	return MKEY_PRINT;
+//		case GLFW_KEY_MENU:			return MKEY_MENU;
+//		case GLFW_KEY_RIGHT_SUPER:	return MKEY_RSUPER;
+//		case GLFW_KEY_LEFT_SUPER:	return MKEY_LSUPER;
+		default:					return "ESCAPE";
+	}
+}
 
 MInput::MInput(void)
 {
@@ -156,6 +221,16 @@ void MInput::createProperty(const char * name)
 {
 	if(name)
 		m_props[name] = 0;
+}
+
+void MInput::downKey(int key)
+{
+	downKey(getKeyMapping(key));
+}
+
+void MInput::upKey(int key)
+{
+	upKey(getKeyMapping(key));
 }
 
 void MInput::downKey(const char * name)

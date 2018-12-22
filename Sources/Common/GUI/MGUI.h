@@ -51,6 +51,7 @@ bool				MGUI_isFocused(void);
 void				MGUI_close(void);
 double				MGUI_getTime(void);
 void				MGUI_setCurrentDirectory(const char * path);
+void 				MGUI_setCursorPosition(int x, int y);
 
 
 // context
@@ -59,7 +60,7 @@ class MGUIContext : public MSystemContext
 public:
 
 	void getScreenSize(unsigned int * width, unsigned int * height){ MWindow *win = MGUI_getWindow(0); *width = win->getWidth(); *height = win->getHeight(); }
-	void setCursorPosition(int x, int y){}
+	void setCursorPosition(int x, int y){ MGUI_setCursorPosition(x, y); }
 	void hideCursor(void){}
 	void showCursor(void){}
 	const char * getWorkingDirectory(void){ return ""; }

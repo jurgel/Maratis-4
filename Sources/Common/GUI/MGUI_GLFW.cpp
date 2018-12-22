@@ -598,3 +598,19 @@ void MGUI_setCurrentDirectory(const char * path)
 		chdir(path);
 	#endif
 }
+
+void MGUI_setCursorPosition(int x, int y)
+{
+	unsigned long wSize = windows.size();
+	if(wSize == 0)
+		return;
+
+	// main window
+	MGLFWWindow * window0 = windows[0];
+	if(! window0->running)
+	{
+		return;
+	}
+
+	glfwSetCursorPos(window0->glfwWindow, x, y);
+}
